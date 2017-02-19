@@ -30,7 +30,6 @@ function draw() {
   // Hide Scrollbar
   document.body.style.overflow = 'hidden';
   for(var i = 0; i < walkers.length; i++) {
-    console.log("for-loop");
     walkers[i].move();
   }
 }
@@ -54,7 +53,6 @@ function Walker(strokeR, strokeG, strokeB, xPos, yPos) {
   this.weight = 6;
 
   this.move = function(){
-    console.log("Move!");
     var r = floor(random(4)); // Min: Default 0
     var inc = 3;
 

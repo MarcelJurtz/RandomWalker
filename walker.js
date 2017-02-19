@@ -11,8 +11,13 @@ function setup() {
   x = w / 2;
   y = h / 2;
 
-  for(var i = 0; i < 5; i++) {
-    walkers.push(new Walker());
+  var walkerAmount = 5;
+
+  for(var i = 0; i < walkerAmount; i++) {
+    var r = random(255);
+    var g = random(255);
+    var b = random(255);
+    walkers.push(new Walker(r,g,b));
   }
 
   for(var i = 0; i < walkers.length; i++) {
@@ -29,9 +34,13 @@ function draw() {
   }
 }
 
-function Walker() {
+function Walker(strokeR, strokeG, strokeB) {
   this.x = random(width);
   this.y = random(height);
+  this.strokeR = strokeR;
+  this.strokeG = strokeG;
+  this.strokeB = strokeB;
+
   this.weight = 6;
 
   this.move = function(){
@@ -61,7 +70,7 @@ function Walker() {
   };
 
   this.drawPos = function() {
-    stroke(255);
+    stroke(this.strokeR, this.strokeG, this.strokeB);
     strokeWeight(this.weight);
     point(this.x, this.y);
   };

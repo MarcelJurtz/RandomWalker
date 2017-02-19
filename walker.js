@@ -1,23 +1,23 @@
+// Dimensions of available space
 var x;
 var y;
+// Contains all walkers
 var walkers = [];
 
-
+// Runs once
 function setup() {
   var w = window.innerWidth;
   var h = window.innerHeight;
   createCanvas(w, h);
   background(50);
-  x = w / 2;
-  y = h / 2;
 
-  var walkerAmount = 5;
+  var walkerAmount = 1;
 
   for(var i = 0; i < walkerAmount; i++) {
     var r = random(255);
     var g = random(255);
     var b = random(255);
-    walkers.push(new Walker(r,g,b));
+    walkers.push(new Walker(r,g,b, w/2, h/2));
   }
 
   for(var i = 0; i < walkers.length; i++) {
@@ -25,6 +25,7 @@ function setup() {
   }
 }
 
+// Runs every frame
 function draw() {
   // Hide Scrollbar
   document.body.style.overflow = 'hidden';
@@ -34,9 +35,18 @@ function draw() {
   }
 }
 
-function Walker(strokeR, strokeG, strokeB) {
-  this.x = random(width);
-  this.y = random(height);
+// Mouse-Press adds new Walker at mouse-position
+function mousePressed() {
+  var r = random(255);
+  var g = random(255);
+  var b = random(255);
+  walkers.push(new Walker(r,g,b, mouseX, mouseY));
+}
+
+// Walker-Object
+function Walker(strokeR, strokeG, strokeB, xPos, yPos) {
+  this.x = xPos;
+  this.y = yPos;
   this.strokeR = strokeR;
   this.strokeG = strokeG;
   this.strokeB = strokeB;

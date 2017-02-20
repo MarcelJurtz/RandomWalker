@@ -30,6 +30,17 @@ function draw() {
   // Hide Scrollbar
   document.body.style.overflow = 'hidden';
   for(var i = 0; i < walkers.length; i++) {
+    for(var j = walkers.length-1; j >= 0; j--) {
+      if(walkers[i].intersectsWith(walkers[j]) && i != j) {
+        console.log("collision!");
+        walkers[i].alpha = 128;
+        walkers[j].alpha = 128;
+      } else {
+        walkers[i].alpha = 255;
+        walkers[j].alpha = 255;
+      }
+    }
+
     walkers[i].move();
   }
 }
@@ -49,6 +60,7 @@ function Walker(strokeR, strokeG, strokeB, xPos, yPos) {
   this.strokeR = strokeR;
   this.strokeG = strokeG;
   this.strokeB = strokeB;
+  this.alpha = 255;
 
   this.weight = 6;
 
@@ -77,8 +89,16 @@ function Walker(strokeR, strokeG, strokeB, xPos, yPos) {
     this.drawPos();
   };
 
+  this.intersectsWith = function(other) {
+    if(dist(this.x, this.y, other.x, other.y) < 6) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   this.drawPos = function() {
-    stroke(this.strokeR, this.strokeG, this.strokeB);
+    stroke(this.strokeR, this.strokeG, this.strokeB, this.alpha);
     strokeWeight(this.weight);
     point(this.x, this.y);
   };
